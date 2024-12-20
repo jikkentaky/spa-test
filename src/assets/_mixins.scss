@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'variables-colors';
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin hover($_property, $_toValue) {
+  transition: #{$_property} $transition-time !important;
+
+  &:hover {
+    #{$_property}: $_toValue !important;
+  }
+}
+

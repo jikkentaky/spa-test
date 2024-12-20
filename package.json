@@ -1,0 +1,43 @@
+{
+    "name": "nextjs-15-starter-core",
+    "version": "1.0.0",
+    "private": false,
+    "website": "https://nextjs-15-starter-core-core.vercel.app/",
+    "license": "MIT",
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+    },
+    "dependencies": {
+        "next": "15.0.4",
+        "next-intl": "^3.26.2",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
+        "sass": "1.60",
+        "sass-loader": "^13.3.3"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.16.0",
+        "@next/bundle-analyzer": "^15.0.4",
+        "@next/eslint-plugin-next": "^15.0.4",
+        "@trivago/prettier-plugin-sort-imports": "^5.1.0",
+        "@types/node": "^22.10.1",
+        "@types/react": "19.0.1",
+        "@types/react-dom": "19.0.1",
+        "eslint": "^9.16.0",
+        "eslint-config-next": "15.0.4",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-promise": "^7.2.1",
+        "eslint-plugin-react": "^7.37.2",
+        "globals": "^15.13.0",
+        "postcss": "^8.4.49",
+        "prettier": "^3.4.2",
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.17.0"
+    }
+}

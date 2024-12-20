@@ -1,0 +1,11 @@
+{
+    "HomePage": {
+        "title": "привет"
+    },
+    "Orders": {
+        "title": "заказы"
+    },
+    "Products": {
+        "title": "продукты"
+    }
+}
