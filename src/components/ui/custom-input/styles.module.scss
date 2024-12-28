@@ -1,0 +1,61 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  &.error {
+    .inputContainer {
+      border-color: $color-red;
+
+      .inputField {
+        color: $color-red;
+      }
+    }
+  }
+}
+
+.inputLabel {
+  font-size: $fs-14;
+  color: $color-gray;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid $color-light-gray;
+  border-radius: 8px;
+  background: $color-white;
+
+  &:focus-within {
+    border-color: $color-blue-2;
+  }
+
+  .inputIcon {
+    margin-right: 8px;
+    color: $color-blue;
+    font-size: $fs-16;
+  }
+}
+
+.inputField {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: $fs-16;
+  color: $color-dark-blue;
+
+  &::placeholder {
+    color: $color-light-gray-2;
+  }
+}
+
+.inputError {
+  font-size: $fs-12;
+  color: $color-red;
+  margin-top: 4px;
+}

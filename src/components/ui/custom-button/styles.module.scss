@@ -1,0 +1,37 @@
+@import 'src/assets/variables';
+@import 'src/assets/variables-colors';
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: $fs-16;
+  cursor: pointer;
+  transition: background-color $transition-time;
+
+  &--primary {
+    background-color: $color-blue;
+    color: $color-white;
+
+    &:hover {
+      background-color: darken($color-blue, 10%);
+    }
+  }
+
+  &--secondary {
+    background-color: $color-gray;
+    color: $color-white;
+
+    &:hover {
+      background-color: darken($color-gray, 10%);
+    }
+  }
+
+  &__icon {
+    margin-right: 8px;
+    font-size: $fs-16;
+  }
+}

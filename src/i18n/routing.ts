@@ -8,14 +8,6 @@ export const routing = defineRouting({
     defaultLocale: 'ru',
     pathnames: {
         '/': '/',
-        '/orders': {
-            en: '/orders',
-            ru: '/заказы'
-        },
-         '/products': {
-             en: '/products',
-             ru: '/продукты'
-         }
     }
 });
 
