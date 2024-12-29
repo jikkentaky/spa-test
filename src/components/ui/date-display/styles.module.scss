@@ -1,0 +1,14 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.date-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  &__day-of-week,
+  &__date-string {
+    font-size: $fs-16;
+    color: $color-dark-gray;
+  }
+}

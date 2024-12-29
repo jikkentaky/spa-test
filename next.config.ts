@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
     sassOptions: {
         includePaths: ['./src/assets']
-    }
+    },
 };
 
 export default withNextIntl(nextConfig);

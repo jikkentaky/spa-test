@@ -1,0 +1,13 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.time-display {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  &__time {
+    font-size: $fs-16;
+    color: $color-dark-gray;
+  }
+}

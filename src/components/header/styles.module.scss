@@ -1,0 +1,21 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.header {
+  padding: 1.4em 0;
+  box-shadow: 0 2px 7px -3px $color-dark-gray;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__info {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-end;
+  }
+}
