@@ -1,6 +1,9 @@
+'use client'
+
 import React, { InputHTMLAttributes, forwardRef } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
+import { useAppSelector } from '@/libs/hooks';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
@@ -10,6 +13,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const CustomInput = forwardRef<HTMLInputElement, InputProps>(
     ({ label, error, icon, className = "", ...props }, ref) => {
+        const counter = useAppSelector(state => state.counter);
+        console.log(counter);
+
         return (
             <div className={clsx(styles.inputWrapper, { [styles.error]: error }, className)}>
                 {label &&

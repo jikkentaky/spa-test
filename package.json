@@ -12,6 +12,7 @@
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^2.5.0",
         "axios": "^1.7.9",
         "bcrypt": "^5.1.1",
         "bcryptjs": "^2.4.3",
@@ -25,6 +26,7 @@
         "pg-hstore": "^2.3.4",
         "react": "19.0.0",
         "react-dom": "19.0.0",
+        "react-redux": "^9.2.0",
         "react-spinners": "^0.15.0",
         "sass": "1.60",
         "sass-loader": "^13.3.3",

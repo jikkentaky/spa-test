@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { cookies} from "next/headers";
 import jwt from "jsonwebtoken";
 import {redirect} from "next/navigation";
-import { getCollection } from '../../lib/db';
+import { getCollection } from '@/libs/db';
 
 function generateToken(userId: string) {
     if (!process.env.JWT_SECRET) {

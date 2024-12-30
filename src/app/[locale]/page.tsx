@@ -7,6 +7,7 @@ import CustomButton from '@/components/ui/custom-button/custom-button';
 const HomePage = () => {
     const t = useTranslations('HomePage');
 
+
     return (
         <div>
             <h1>{t('title')}</h1>

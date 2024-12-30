@@ -5,6 +5,7 @@ import { Locale, routing } from '@/i18n/routing';
 import NotFound from '@/app/[locale]/not-found';
 import { Header } from '@/components/header';
 import { Inter } from 'next/font/google'
+import StoreProvider from '@/app/store-provider';
 import '../../assets/globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,7 +15,7 @@ type Props = {
     params: { locale: Locale };
 };
 
-const LocaleLayout: FC<Props> = async ({ children, params }) => {
+const RootLayout: FC<Props> = async ({ children, params }) => {
     const { locale } = await params;
 
     if (!routing.locales.includes(locale)) {
@@ -24,16 +25,18 @@ const LocaleLayout: FC<Props> = async ({ children, params }) => {
     const messages = await getMessages();
 
     return (
-        <html lang={locale}>
-            <body className={inter.className}>
-                <NextIntlClientProvider messages={messages}>
-                    <Header />
+        <StoreProvider>
+            <html lang={locale}>
+                <body className={inter.className}>
+                    <NextIntlClientProvider messages={messages}>
+                        <Header />
 
-                    {children}
-                </NextIntlClientProvider>
-            </body>
-        </html>
+                        {children}
+                    </NextIntlClientProvider>
+                </body>
+            </html>
+        </StoreProvider>
     );
 };
 
-export default LocaleLayout;
+export default RootLayout;
