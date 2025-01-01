@@ -6,8 +6,8 @@
   display: flex;
   justify-content: center;
   @include container;
-  margin-top: 5em;
   flex-direction: column;
+  padding-top: 5em;
 }
 
 .title {

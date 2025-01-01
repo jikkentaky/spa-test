@@ -10,7 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     icon?: React.ReactNode;
 }
 
-const CustomInput = forwardRef<HTMLInputElement, InputProps>(
+export const CustomInput = forwardRef<HTMLInputElement, InputProps>(
     ({ label, error, icon, className = "", ...props }, ref) => {
 
         return (
@@ -36,5 +36,3 @@ const CustomInput = forwardRef<HTMLInputElement, InputProps>(
         );
     }
 );
-
-export default CustomInput;

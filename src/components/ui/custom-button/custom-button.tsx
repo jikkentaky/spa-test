@@ -7,7 +7,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary";
 }
 
-const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
+export const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ children, icon, variant = "primary", className = "", ...props }, ref) => {
         return (
             <button
@@ -22,5 +22,3 @@ const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
         );
     }
 );
-
-export default CustomButton;

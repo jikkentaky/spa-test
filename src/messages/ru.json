@@ -20,5 +20,9 @@
     },
     "Products": {
         "title": "продукты"
+    },
+    "Aside": {
+        "orders": "приходы",
+        "products": "продукты"
     }
 }

@@ -3,11 +3,11 @@
 import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
 import { cookies} from "next/headers";
-import jwt from "jsonwebtoken";
 import {redirect} from "next/navigation";
-import { getCollection } from '@/libs/db';
+import { getCollection } from '@/libs/db/db';
 
 import { z } from "zod";
+import { generateToken, setAuthCookie } from '@/libs/helpers';
 
 const errorMessages = {
     invalidEmail: "invalidEmail",
@@ -30,34 +30,10 @@ const userSchema = z.object({
         .regex(/[\W_]/, errorMessages.passwordTooSimple),
 });
 
-function generateToken(userId: string, email: string,) {
-    if (!process.env.JWT_SECRET) {
-        throw new Error("Missing JWT_SECRET");
-    }
-
-    return jwt.sign(
-        {
-            email,
-            userId: userId,
-            exp: Math.floor(Date.now() / 1000) * 60 * 60 * 1000,
-        },
-        process.env.JWT_SECRET as string,
-    );
-}
-
-async function setAuthCookie(token: string) {
-    (await cookies()).set("myapp", token, {
-        httpOnly: true,
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 1000,
-        secure: true
-    });
-}
-
-export async function login(
+export const login = async (
     _previousState: string | null | undefined,
     formData: FormData
-): Promise<string | null | undefined> {
+) => {
     try {
         const user = userSchema.parse({
             email: formData.get("email"),
@@ -89,16 +65,16 @@ export async function login(
     }
 }
 
-export async function logout() {
+export const logout = async () => {
     (await cookies()).delete('myapp')
 
     redirect('/')
 }
 
-export async function signUp(
+export const signUp = async(
     _previousState: string | null | undefined,
     formData: FormData
-): Promise<string | null | undefined> {
+) => {
     try {
         const newUser = userSchema.parse({
             email: formData.get("email"),

@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/libs/hooks';
+import { useAppSelector } from '@/libs/store/hooks';
 import { redirect } from '@/i18n/routing';
 import { withAuthAction } from '@/components/with-auth-action';
 import { useTranslations } from 'next-intl';

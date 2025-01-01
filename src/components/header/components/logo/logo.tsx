@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import styles from './styles.module.scss';
-import LogoIcon from '@/components/ui/icons/logo';
+import { LogoIcon } from '@/components/ui/icons/logo';
 
 export const Logo = () => {
     return (
         <Link
-            href="/"
+            href="/public"
             className={styles.logo}
         >
             <LogoIcon />

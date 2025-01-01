@@ -4,10 +4,11 @@ import NotFound from '@/app/[locale]/not-found';
 import StoreProvider from '@/app/store-provider';
 import { Header } from '@/components/header';
 import { Locale, routing } from '@/i18n/routing';
-import { getUser } from '@/libs/get-user';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Toaster } from "react-hot-toast";
+import { getUser } from '@/libs/helpers';
+import { Aside } from '@/components/aside';
 import '../../assets/globals.scss';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -34,9 +35,13 @@ const RootLayout: FC<Props> = async ({ children, params }) => {
                     <NextIntlClientProvider messages={messages}>
                         <Header user={user}/>
 
-                        <Toaster position="bottom-right" />
+                        <div className='container'>
+                            {user && <Aside />}
 
-                        {children}
+                            {children}
+                        </div>
+
+                        <Toaster position="bottom-right" />
                     </NextIntlClientProvider>
                 </body>
             </html>

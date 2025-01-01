@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Loader } from '@/components/ui/loader/loader';
-import ClockIcon from '@/components/ui/icons/clock-icon';
+import { ClockIcon } from '@/components/ui/icons/clock-icon';
 import styles from './styles.module.scss';
 
 export const TimeDisplay = () => {

@@ -1,7 +1,7 @@
 'use client';
 
-import CustomInput from '@/components/ui/custom-input/custom-input';
-import CustomButton from '@/components/ui/custom-button/custom-button';
+import { CustomInput } from '@/components/ui/custom-input/custom-input';
+import { CustomButton } from '@/components/ui/custom-button/custom-button';
 import { AuthMode } from '@/types/types';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-hot-toast';
@@ -42,7 +42,7 @@ export const AuthForm = ({ action, isPending, error, mode }: Props) => {
                 name='password'
             />
 
-            <CustomButton type='submit'>
+            <CustomButton type='submit' disabled={isPending}>
                 {mode === 'signup' ? t('signUpButton') : t('loginButton')}
             </CustomButton>
 

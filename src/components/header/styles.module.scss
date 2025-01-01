@@ -3,8 +3,11 @@
 @import "src/assets/mixins";
 
 .header {
+  position: relative;
   padding: 1.4em 0;
   box-shadow: 0 0.13em 0.44em -0.19em $color-dark-gray;
+  max-height: $header-height;
+  z-index: 2;
 
   &__container {
     display: flex;

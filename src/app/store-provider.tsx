@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux'
-import { store } from '@/libs/store';
+import { store } from '@/libs/store/store';
 
 export default function StoreProvider({ children }: {
     children: ReactNode

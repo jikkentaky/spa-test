@@ -1,0 +1,30 @@
+@import "src/assets/variables";
+@import "src/assets/variables-colors";;
+
+.user-bar {
+  position: relative;
+  width: max-content;
+
+  &__avatar {
+    border-radius: 50%;
+  }
+
+  &__settings-button {
+    position: absolute;
+    padding: 0.5em;
+    background-color: $color-white;
+    bottom: 0.75em;
+    right: 0;
+    border-radius: 50%;
+    transition: background-color $transition-time;
+    box-shadow: 0 0.1em 0.2em $color-dark-gray;
+
+    &:hover {
+      background-color: $color-light-gray;
+    }
+  }
+
+  &__settings-icon {
+    color: $color-dark-blue;
+  }
+}

@@ -1,4 +1,4 @@
-export default function LogoIcon() {
+export const LogoIcon = () => {
     return (
         <svg version="1.1" id="Layer_1" width="45px" height="45px" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enableBackground="new 0 0 64 64" xmlSpace="preserve">
             <image id="image0" x="0" y="0"

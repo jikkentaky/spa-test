@@ -1,14 +1,13 @@
 'use client';
 
-import { DateDisplay } from '@/components/ui/date-display/date-display';
-import { TimeDisplay } from '@/components/ui/time-display';
-import { Logo } from '@/components/ui/logo';
-import styles from './styles.module.scss';
-import { useAppDispatch } from '@/libs/hooks';
+import { DateDisplay } from '@/components/header/components/date-display';
+import { TimeDisplay } from '@/components/header/components/time-display';
+import { useAppDispatch } from '@/libs/store/hooks';
 import { useEffect } from 'react';
 import { addUser } from '@/libs/features/user/user-slice';
 import { User } from '@/types/types';
-import { useLocale } from 'use-intl';
+import { Logo } from '@/components/header/components/logo';
+import styles from './styles.module.scss';
 
 type Props = {
     user: User | null;

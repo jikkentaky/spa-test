@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useAppSelector } from '@/libs/hooks';
+import { useAppSelector } from '@/libs/store/hooks';
 import { withAuthAction } from '@/components/with-auth-action';
 import { AuthForm } from '@/components/auth-form';
 import styles from './styles.module.scss';
@@ -19,7 +19,7 @@ const HomePage = () => {
 
                     <SignUpForm mode={'signup'} />
                 </div>
-                : <div>{t('welcomeMessage')}</div>
+                : <div className={styles.message}>{t('welcomeMessage')}</div>
             }
         </div>
     );

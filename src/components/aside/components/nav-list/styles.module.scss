@@ -1,0 +1,42 @@
+@import "src/assets/variables";
+@import "src/assets/variables-colors";
+
+.navigationMenu {
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    padding: 0;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__link {
+    position: relative;
+    font-size: $fs-18;
+    font-weight: $fw-800;
+    color: $color-dark-gray;
+    transition: color $transition-time;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $color-green-2;
+    }
+  }
+
+  &__underline {
+    position: absolute;
+    left: 0;
+    bottom: -0.25em;
+    height: 0.16em;
+    background-color: $color-green-2;
+    transition: width $transition-time;
+  }
+
+  &__underline--active {
+    width: 100%;
+  }
+}

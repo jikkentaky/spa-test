@@ -4,8 +4,9 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { locales, usePathname, useRouter } from '@/i18n/routing';
 import { useLocale } from 'use-intl';
 import { useParams } from 'next/navigation';
+import styles from './styles.module.scss';
 
-const LanguageSwitcher = () => {
+export const LanguageSwitcher = () => {
     const locale = useLocale();
     const router = useRouter();
     const [selectedLocale, setSelectedLocale] = useState(locale);
@@ -28,7 +29,7 @@ const LanguageSwitcher = () => {
     };
 
     return (
-        <select value={selectedLocale} onChange={handleChange}>
+        <select value={selectedLocale} onChange={handleChange} className={styles['select']}>
             {locales.map((locale) => (
                 <option key={locale} value={locale}>
                     {locale}
@@ -37,5 +38,3 @@ const LanguageSwitcher = () => {
         </select>
     );
 };
-
-export default LanguageSwitcher;
