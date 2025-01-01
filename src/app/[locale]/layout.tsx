@@ -1,12 +1,14 @@
 import { FC, ReactNode } from 'react';
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import { Locale, routing } from '@/i18n/routing';
+import { Inter } from 'next/font/google';
 import NotFound from '@/app/[locale]/not-found';
-import { Header } from '@/components/header';
-import { Inter } from 'next/font/google'
 import StoreProvider from '@/app/store-provider';
-import '../../assets/globals.scss'
+import { Header } from '@/components/header';
+import { Locale, routing } from '@/i18n/routing';
+import { getUser } from '@/libs/get-user';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { Toaster } from "react-hot-toast";
+import '../../assets/globals.scss';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +19,7 @@ type Props = {
 
 const RootLayout: FC<Props> = async ({ children, params }) => {
     const { locale } = await params;
+    const user = await getUser()
 
     if (!routing.locales.includes(locale)) {
        return <NotFound />;
@@ -29,7 +32,9 @@ const RootLayout: FC<Props> = async ({ children, params }) => {
             <html lang={locale}>
                 <body className={inter.className}>
                     <NextIntlClientProvider messages={messages}>
-                        <Header />
+                        <Header user={user}/>
+
+                        <Toaster position="bottom-right" />
 
                         {children}
                     </NextIntlClientProvider>

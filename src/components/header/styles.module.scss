@@ -1,21 +1,21 @@
 @import "src/assets/variables-colors";
 @import "src/assets/variables";
+@import "src/assets/mixins";
 
 .header {
   padding: 1.4em 0;
-  box-shadow: 0 2px 7px -3px $color-dark-gray;
+  box-shadow: 0 0.13em 0.44em -0.19em $color-dark-gray;
 
   &__container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    @include container;
   }
 
   &__info {
     display: flex;
-    gap: 1.75rem;
+    gap: 1.75em;
     align-items: flex-end;
   }
 }

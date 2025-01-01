@@ -4,8 +4,8 @@
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.5em;
+  margin-bottom: 1em;
 
   &.error {
     .inputContainer {
@@ -26,9 +26,9 @@
 .inputContainer {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
-  border: 1px solid $color-light-gray;
-  border-radius: 8px;
+  padding: 0.5em 0.75em;
+  border: 0.06em solid $color-light-gray;
+  border-radius: 0.5em;
   background: $color-white;
 
   &:focus-within {
@@ -36,7 +36,7 @@
   }
 
   .inputIcon {
-    margin-right: 8px;
+    margin-right: 0.5em;
     color: $color-blue;
     font-size: $fs-16;
   }
@@ -57,5 +57,5 @@
 .inputError {
   font-size: $fs-12;
   color: $color-red;
-  margin-top: 4px;
+  margin-top: 0.25em;
 }

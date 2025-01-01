@@ -7,14 +7,37 @@ import jwt from "jsonwebtoken";
 import {redirect} from "next/navigation";
 import { getCollection } from '@/libs/db';
 
-function generateToken(userId: string) {
+import { z } from "zod";
+
+const errorMessages = {
+    invalidEmail: "invalidEmail",
+    invalidPassword: "invalidPassword",
+    userNotFound: "userNotFound",
+    userExists: "userExists",
+    passwordTooShort: "passwordTooShort",
+    passwordTooSimple: "passwordTooSimple",
+    serverError: "serverError",
+};
+
+const userSchema = z.object({
+    email: z.string().email(errorMessages.invalidEmail),
+    password: z
+        .string()
+        .min(8, errorMessages.passwordTooShort)
+        .regex(/[A-Z]/, errorMessages.passwordTooSimple)
+        .regex(/[a-z]/, errorMessages.passwordTooSimple)
+        .regex(/[0-9]/, errorMessages.passwordTooSimple)
+        .regex(/[\W_]/, errorMessages.passwordTooSimple),
+});
+
+function generateToken(userId: string, email: string,) {
     if (!process.env.JWT_SECRET) {
         throw new Error("Missing JWT_SECRET");
     }
 
     return jwt.sign(
         {
-            skyColor: 'blue',
+            email,
             userId: userId,
             exp: Math.floor(Date.now() / 1000) * 60 * 60 * 1000,
         },
@@ -31,29 +54,39 @@ async function setAuthCookie(token: string) {
     });
 }
 
-export async function login(_previousState: null, formData: FormData) {
-    const user = {
-        email: formData.get("email") as string,
-        password: formData.get('password') as string,
-    };
+export async function login(
+    _previousState: string | null | undefined,
+    formData: FormData
+): Promise<string | null | undefined> {
+    try {
+        const user = userSchema.parse({
+            email: formData.get("email"),
+            password: formData.get("password"),
+        });
 
-    const usersCollection = await getCollection('users');
-    const existUser = await usersCollection.findOne({ email: user.email });
+        const usersCollection = await getCollection("users");
+        const existUser = await usersCollection.findOne({ email: user.email });
 
-    if (!existUser) {
-        throw new Error("User does not exist");
+        if (!existUser) {
+            return errorMessages.userNotFound;
+        }
+
+        const isPasswordValid = bcrypt.compareSync(user.password, existUser.password);
+        if (!isPasswordValid) {
+            return errorMessages.invalidPassword;
+        }
+
+        const token = generateToken(existUser._id.toString(), existUser.email);
+        await setAuthCookie(token);
+
+        revalidatePath("/");
+    } catch (e) {
+        if (e instanceof z.ZodError) {
+            return e.errors[0].message;
+        }
+
+        return errorMessages.serverError;
     }
-
-    const isPasswordValid = bcrypt.compareSync(user.password, existUser.password);
-
-    if (!isPasswordValid) {
-        throw new Error("Invalid password");
-    }
-
-    const token = generateToken(existUser._id.toString());
-    await setAuthCookie(token);
-
-    redirect('/')
 }
 
 export async function logout() {
@@ -62,41 +95,41 @@ export async function logout() {
     redirect('/')
 }
 
-export async function register(_previousState: null, formData: FormData) {
-    const newUser = {
-        email: formData.get("email"),
-        password: formData.get('password'),
-    }
-
-    if (typeof newUser.password !== 'string') {
-        throw new Error("Password must be a string");
-    }
-
-    if (typeof newUser.email !== 'string') {
-        throw new Error("Email must be a string");
-    }
-
+export async function signUp(
+    _previousState: string | null | undefined,
+    formData: FormData
+): Promise<string | null | undefined> {
     try {
-        const usersCollection = await getCollection('users');
+        const newUser = userSchema.parse({
+            email: formData.get("email"),
+            password: formData.get("password"),
+        });
+
+        const usersCollection = await getCollection("users");
         const existUser = await usersCollection.findOne({ email: newUser.email });
 
         if (existUser) {
-            return "User already exists";
+            return errorMessages.userExists; // Локализованный ключ
         }
 
         const salt = bcrypt.genSaltSync(10);
-        newUser.password = bcrypt.hashSync(newUser.password, salt);
+        const hashedPassword = bcrypt.hashSync(newUser.password, salt);
 
-        const createdUser = await usersCollection.insertOne(newUser);
+        const createdUser = await usersCollection.insertOne({
+            email: newUser.email,
+            password: hashedPassword,
+        });
+
         const userId = createdUser.insertedId.toString();
-
-        const token = generateToken(userId);
+        const token = generateToken(userId, newUser.email);
         await setAuthCookie(token);
+
+        revalidatePath("/");
     } catch (e) {
-        console.error(e)
+        if (e instanceof z.ZodError) {
+            return e.errors[0].message;
+        }
 
-        return "be attention, An error occurred.";
+        return errorMessages.serverError;
     }
-
-    revalidatePath("/");
 }

@@ -1,6 +1,19 @@
 {
     "HomePage": {
-        "title": "hello"
+        "signUp": "Don't have an account? Create One.",
+        "welcomeMessage": "Welcome to Inventory! We're thrilled to have you here. Manage your orders and purchases effortlessly with our intuitive platform. Let's get started on making your order management seamless and efficient!"
+    },
+    "Auth": {
+        "titleLogin": "Log In please",
+        "loginButton": "Log In",
+        "signUpButton": "Create account",
+        "invalidEmail": "Invalid email format.",
+        "invalidPassword": "Invalid password.",
+        "userNotFound": "User does not exist.",
+        "userExists": "User already exists.",
+        "passwordTooShort": "Password must be at least 8 characters long.",
+        "passwordTooSimple": "Password must include uppercase, lowercase letters, a number, and a special character.",
+        "serverError": "An unexpected error occurred. Please try again."
     },
     "Orders": {
         "title": "orders"

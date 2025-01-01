@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import { Loader } from '@/components/ui/loader/loader';
 import styles from './styles.module.scss';
+import { useLocale } from 'use-intl';
 
 export const DateDisplay = () => {
     const [currentDate, setCurrentDate] = useState<Date | null>(null);
+    const locale = useLocale();
 
     useEffect(() => {
         setCurrentDate(new Date());
@@ -13,7 +15,7 @@ export const DateDisplay = () => {
 
     const formatDate = (date: Date): { dayOfWeek: string; dateString: string } => {
         const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' };
-        const formattedDate = date.toLocaleDateString('ru-RU', options);
+        const formattedDate = date.toLocaleDateString(`${locale.toLowerCase()}-${locale.toUpperCase()}`, options);
 
         const [dayOfWeek, dateString] = formattedDate.split(', ');
 

@@ -1,25 +1,26 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
-import LanguageSwitcher from '@/components/ui/language-swithcer/language-swithcer';
-import { register } from '@/actions/user-controller';
-import CustomInput from '@/components/ui/custom-input/custom-input';
-import CustomButton from '@/components/ui/custom-button/custom-button';
+import { useAppSelector } from '@/libs/hooks';
+import { withAuthAction } from '@/components/with-auth-action';
+import { AuthForm } from '@/components/auth-form';
+import styles from './styles.module.scss';
 
 const HomePage = () => {
     const t = useTranslations('HomePage');
-
+    const { user } = useAppSelector(state => state.user);
+    const SignUpForm = withAuthAction(AuthForm);
 
     return (
-        <div>
-            <h1>{t('title')}</h1>
-            <LanguageSwitcher />
+        <div className={styles.container}>
+            {(!user) ?
+                <div>
+                    <h2 className={styles.title}>{t('signUp')}</h2>
 
-            <CustomInput />
-
-            <CustomButton>
-                button
-            </CustomButton>
-
-            {/*<button onClick={register}>click</button>*/}
+                    <SignUpForm mode={'signup'} />
+                </div>
+                : <div>{t('welcomeMessage')}</div>
+            }
         </div>
     );
 };
