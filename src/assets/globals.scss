@@ -23,6 +23,17 @@ a {
     text-decoration: none;
 }
 
-.container {
-  height: calc(100vh - 93px);
+.wrapper {
+  display: flex;
+
+  &__content {
+    width: calc(100% - $aside-width);
+    margin-left: auto;
+  }
+}
+
+.content {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -1,0 +1,52 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  border: 0.07px solid $color-dark-blue;
+  border-radius: 0.5em;
+  background-color: $color-white;
+
+  &__image {
+    flex-shrink: 0;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    width: 16rem;
+  }
+
+  &__type {
+    width: 6rem;
+  }
+
+  &__guarantee {
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__priceList {
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__priceItem {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  &__order {
+    flex-shrink: 0;
+  }
+}

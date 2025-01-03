@@ -2,16 +2,18 @@
 @import "src/assets/variables";
 
 .aside {
-  width: 16%;
-  height: calc(100vh - $header-height);
+  position: fixed;
+  top: 0;
+  width: $aside-width;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  float: left;
   box-shadow: 0 10px 15px $color-dark-gray;
   background-color: white;
-  padding: 3em 1em;
+  padding: 10em 1em 3em;
+  z-index: 1;
 
   &__menu {
     display: flex;

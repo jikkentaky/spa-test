@@ -1,0 +1,39 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.card {
+  background: $color-white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__content {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  &__footer {
+    margin-top: 15px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #0070f3;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

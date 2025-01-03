@@ -1,20 +1,25 @@
- 'use client';
+'use client';
 
+import { logout } from '@/actions/user-controller';
 import { NavList } from '@/components/aside/components/nav-list';
 import { UserSettings } from '@/components/aside/components/user-settigns';
 import { CustomButton } from '@/components/ui/custom-button';
 import { LogoutIcon } from '@/components/ui/icons/logout';
-import { logout } from '@/actions/user-controller';
 import { LanguageSwitcher } from '@/components/ui/language-swithcer';
-import { useActionState } from 'react';
+import { deleteUser } from '@/libs/features/user/user-slice';
+import { useAppDispatch } from '@/libs/store/hooks';
+
 import styles from './styles.module.scss';
+import { useLocale } from 'use-intl';
 
 export const Aside = () => {
-     const [_error, action, _isPending] = useActionState(logout, null)
+    const locale = useLocale();
+    const dispatch = useAppDispatch();
 
-     const handleLogout = () => {
-         action()
-     }
+    const handleLogout = () => {
+        logout(locale);
+        dispatch(deleteUser());
+    };
 
     return (
         <aside className={styles.aside}>

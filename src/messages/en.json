@@ -19,10 +19,12 @@
         "title": "orders"
     },
     "Products": {
-        "title": "products"
+        "title": "Products",
+        "filter": "Filter by type:"
     },
     "Aside": {
         "orders": "orders",
-        "products": "products"
+        "products": "products",
+        "dashboard": "dashboard"
     }
 }

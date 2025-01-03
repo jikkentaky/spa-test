@@ -1,15 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../../store/store';
-import { User } from '@/types/user.type';
+import { User } from '@/types/types';
+import { createSlice } from '@reduxjs/toolkit';
 
 type UserState = {
     user: User | null;
-}
+};
 
 const initialState: UserState = {
-    user: null,
-}
+    user: null
+};
 
 export const userSlice = createSlice({
     name: 'user',
@@ -18,12 +16,12 @@ export const userSlice = createSlice({
         addUser: (state, action) => {
             state.user = action.payload;
         },
-    },
-})
+        deleteUser: (state) => {
+            state.user = null;
+        }
+    }
+});
 
-export const { addUser } = userSlice.actions
+export const { addUser, deleteUser } = userSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value
-
-export default userSlice.reducer
+export default userSlice.reducer;

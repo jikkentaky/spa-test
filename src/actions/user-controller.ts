@@ -1,22 +1,33 @@
 'use server';
 
-import bcrypt from "bcrypt";
-import { revalidatePath } from "next/cache";
-import { cookies} from "next/headers";
-import {redirect} from "next/navigation";
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+import { generateToken } from '@/helpers';
 import { getCollection } from '@/libs/db/db';
 
-import { z } from "zod";
-import { generateToken, setAuthCookie } from '@/libs/helpers';
+import bcrypt from 'bcryptjs';
+import { jwtVerify } from 'jose';
+import { z } from 'zod';
 
 const errorMessages = {
-    invalidEmail: "invalidEmail",
-    invalidPassword: "invalidPassword",
-    userNotFound: "userNotFound",
-    userExists: "userExists",
-    passwordTooShort: "passwordTooShort",
-    passwordTooSimple: "passwordTooSimple",
-    serverError: "serverError",
+    invalidEmail: 'invalidEmail',
+    invalidPassword: 'invalidPassword',
+    userNotFound: 'userNotFound',
+    userExists: 'userExists',
+    passwordTooShort: 'passwordTooShort',
+    passwordTooSimple: 'passwordTooSimple',
+    serverError: 'serverError'
+};
+
+const setAuthCookie = async (token: string) => {
+    (await cookies()).set('myapp', token, {
+        httpOnly: true,
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 60 * 1000,
+        secure: true
+    });
 };
 
 const userSchema = z.object({
@@ -27,20 +38,17 @@ const userSchema = z.object({
         .regex(/[A-Z]/, errorMessages.passwordTooSimple)
         .regex(/[a-z]/, errorMessages.passwordTooSimple)
         .regex(/[0-9]/, errorMessages.passwordTooSimple)
-        .regex(/[\W_]/, errorMessages.passwordTooSimple),
+        .regex(/[\W_]/, errorMessages.passwordTooSimple)
 });
 
-export const login = async (
-    _previousState: string | null | undefined,
-    formData: FormData
-) => {
+export const login = async (_previousState: string | null | undefined, formData: FormData) => {
     try {
         const user = userSchema.parse({
-            email: formData.get("email"),
-            password: formData.get("password"),
+            email: formData.get('email'),
+            password: formData.get('password')
         });
 
-        const usersCollection = await getCollection("users");
+        const usersCollection = await getCollection('users');
         const existUser = await usersCollection.findOne({ email: user.email });
 
         if (!existUser) {
@@ -52,10 +60,10 @@ export const login = async (
             return errorMessages.invalidPassword;
         }
 
-        const token = generateToken(existUser._id.toString(), existUser.email);
+        const token = await generateToken(existUser._id.toString(), existUser.email);
         await setAuthCookie(token);
 
-        revalidatePath("/");
+        revalidatePath('/');
     } catch (e) {
         if (e instanceof z.ZodError) {
             return e.errors[0].message;
@@ -63,29 +71,26 @@ export const login = async (
 
         return errorMessages.serverError;
     }
-}
+};
 
-export const logout = async () => {
-    (await cookies()).delete('myapp')
+export const logout = async (locale: string) => {
+    (await cookies()).delete('myapp');
 
-    redirect('/')
-}
+    redirect(`/${locale.toLowerCase()}/login`);
+};
 
-export const signUp = async(
-    _previousState: string | null | undefined,
-    formData: FormData
-) => {
+export const signUp = async (_previousState: string | null | undefined, formData: FormData) => {
     try {
         const newUser = userSchema.parse({
-            email: formData.get("email"),
-            password: formData.get("password"),
+            email: formData.get('email'),
+            password: formData.get('password')
         });
 
-        const usersCollection = await getCollection("users");
+        const usersCollection = await getCollection('users');
         const existUser = await usersCollection.findOne({ email: newUser.email });
 
         if (existUser) {
-            return errorMessages.userExists; // Локализованный ключ
+            return errorMessages.userExists;
         }
 
         const salt = bcrypt.genSaltSync(10);
@@ -93,14 +98,14 @@ export const signUp = async(
 
         const createdUser = await usersCollection.insertOne({
             email: newUser.email,
-            password: hashedPassword,
+            password: hashedPassword
         });
 
         const userId = createdUser.insertedId.toString();
-        const token = generateToken(userId, newUser.email);
+        const token = await generateToken(userId, newUser.email);
         await setAuthCookie(token);
 
-        revalidatePath("/");
+        revalidatePath('/');
     } catch (e) {
         if (e instanceof z.ZodError) {
             return e.errors[0].message;
@@ -108,4 +113,30 @@ export const signUp = async(
 
         return errorMessages.serverError;
     }
-}
+};
+
+export const getUser = async () => {
+    const existCookie = (await cookies()).get('myapp')?.value;
+
+    if (!process.env.JWT_SECRET) {
+        throw new Error('JWT secret not set');
+    }
+
+    if (existCookie) {
+        try {
+            const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+            const { payload } = await jwtVerify(existCookie, secret, {
+                algorithms: ['HS256']
+            });
+
+            return {
+                userId: payload.userId as string,
+                email: payload.email as string
+            };
+        } catch (e) {
+            return null;
+        }
+    }
+
+    return null;
+};

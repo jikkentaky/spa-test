@@ -1,29 +1,33 @@
 import { FC, ReactNode } from 'react';
+
 import { Inter } from 'next/font/google';
+
+import { getUser } from '@/actions/user-controller';
 import NotFound from '@/app/[locale]/not-found';
 import StoreProvider from '@/app/store-provider';
+import { Aside } from '@/components/aside';
 import { Header } from '@/components/header';
-import { Locale, routing } from '@/i18n/routing';
+import { Locale, navList, redirect, routing } from '@/i18n/routing';
+
+import '../../assets/globals.scss';
+import clsx from 'clsx';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Toaster } from "react-hot-toast";
-import { getUser } from '@/libs/helpers';
-import { Aside } from '@/components/aside';
-import '../../assets/globals.scss';
+import { Toaster } from 'react-hot-toast';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 type Props = {
     children: ReactNode;
     params: { locale: Locale };
 };
 
-const RootLayout: FC<Props> = async ({ children, params }) => {
+const LocalLayout: FC<Props> = async ({ children, params }) => {
     const { locale } = await params;
-    const user = await getUser()
+    const user = await getUser();
 
     if (!routing.locales.includes(locale)) {
-       return <NotFound />;
+        return <NotFound />;
     }
 
     const messages = await getMessages();
@@ -33,15 +37,21 @@ const RootLayout: FC<Props> = async ({ children, params }) => {
             <html lang={locale}>
                 <body className={inter.className}>
                     <NextIntlClientProvider messages={messages}>
-                        <Header user={user}/>
+                        <Header user={user} />
 
-                        <div className='container'>
+                        <div className='wrapper'>
                             {user && <Aside />}
 
-                            {children}
+                            <div
+                                className={clsx({
+                                    ['wrapper__content']: !!user,
+                                    ['content']: !user
+                                })}>
+                                {children}
+                            </div>
                         </div>
 
-                        <Toaster position="bottom-right" />
+                        <Toaster position='bottom-right' />
                     </NextIntlClientProvider>
                 </body>
             </html>
@@ -49,4 +59,4 @@ const RootLayout: FC<Props> = async ({ children, params }) => {
     );
 };
 
-export default RootLayout;
+export default LocalLayout;

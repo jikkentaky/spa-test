@@ -19,10 +19,12 @@
         "title": "заказы"
     },
     "Products": {
-        "title": "продукты"
+        "title": "Продукты",
+        "filter": "Фильтер по типу:"
     },
     "Aside": {
         "orders": "приходы",
-        "products": "продукты"
+        "products": "продукты",
+        "dashboard": "панель"
     }
 }

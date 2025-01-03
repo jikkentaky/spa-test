@@ -1,13 +1,18 @@
-import { useTranslations } from 'next-intl';
+import { getProducts } from '@/actions/products-controller';
+import { ProductsList } from '@/components/products-list/products-list';
 
-const Products = () => {
-    const t = useTranslations('Products');
+const Products = async () => {
+    const products = await getProducts();
+
+    if (!products) {
+        return <div>Failed to fetch products</div>;
+    }
 
     return (
         <div>
-            {t('title')}
+            <ProductsList products={products} />
         </div>
-    )
+    );
 };
 
 export default Products;

@@ -1,0 +1,38 @@
+@import "src/assets/variables-colors";
+@import "src/assets/variables";
+
+.productsList {
+  padding: 2em 4em;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: $fs-24;
+  }
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &__filterLabel {
+    font-size: 1.25em;
+  }
+
+  &__filterSelect {
+    padding: 0.5em;
+    border: 0.07em solid var(--color-border);
+    border-radius: 0.375em;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    margin-top: 1.25em;
+  }
+}
