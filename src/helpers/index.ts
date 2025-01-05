@@ -30,16 +30,16 @@ export const getFormattedDate = (dateInput: string | Date, locale: string) => {
         throw new Error('Invalid date');
     }
 
-    return date
-        .toLocaleDateString(`${locale.toLowerCase()}-${locale.toUpperCase()}`, {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
-        })
-        .replace(/(\d+)\.(\s*)(\w+)\.(\s*)(\d+)/, '$1 / $3 / $5');
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date
+        .toLocaleString(`${locale.toLowerCase()}-${locale.toUpperCase()}`, { month: 'short' })
+        .toLowerCase();
+    const year = date.getFullYear();
+
+    return `${day} / ${month} / ${year}`;
 };
 
-export async function isTokenValid(token: string | undefined): Promise<boolean> {
+export const isTokenValid = async (token: string | undefined): Promise<boolean> => {
     if (!token || !process.env.JWT_SECRET) return false;
 
     try {
@@ -54,4 +54,4 @@ export async function isTokenValid(token: string | undefined): Promise<boolean> 
 
         return false;
     }
-}
+};

@@ -1,13 +1,14 @@
-import { useTranslations } from 'next-intl';
+import { getOrders } from '@/actions/orders-controller';
+import { OrderList } from '@/components/orders-list/order-list';
 
-const Orders = () => {
-    const t = useTranslations('Orders');
+const Orders = async () => {
+    const orders = await getOrders();
 
     return (
         <div>
-            {t('title')}
+            <OrderList ordersFromServer={orders} />
         </div>
-    )
+    );
 };
 
 export default Orders;

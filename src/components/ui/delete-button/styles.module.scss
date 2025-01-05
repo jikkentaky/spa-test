@@ -1,0 +1,22 @@
+@import 'src/assets/variables-colors';
+@import 'src/assets/variables';
+
+.delete-button {
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 1em;
+
+    &:hover {
+        background-color: transparent;
+        border-color: $color-red;
+        border-radius: 50%;
+
+        & svg {
+            fill: $color-red;
+        }
+    }
+
+    & svg {
+        transition: fill $transition-time;
+    }
+}

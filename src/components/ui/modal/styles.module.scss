@@ -1,0 +1,32 @@
+@import 'src/assets/variables-colors';
+@import 'src/assets/mixins';
+
+.modal {
+    &__backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(0.3em);
+        z-index: 2;
+    }
+
+    &__container {
+        position: fixed;
+        inset: 0;
+        @include flex-center;
+        width: 100vw;
+        z-index: 3;
+    }
+
+    &__panel {
+        position: relative;
+        max-width: 35em;
+        width: 100%;
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: -1em;
+        left: -1em;
+    }
+}

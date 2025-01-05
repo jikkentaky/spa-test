@@ -5,7 +5,7 @@ export const locales = ['en', 'ru'];
 
 export const navList = {
     home: { route: '/', link: '/' },
-    dashboard: { route: '/dashboard', link: '/dashboard' },
+    dashboard: { route: '/dashboard', link: 'dashboard' },
     orders: { route: '/orders', link: 'orders' },
     products: { route: '/products', link: 'products' }
 };

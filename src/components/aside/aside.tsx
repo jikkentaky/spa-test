@@ -1,15 +1,18 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { logout } from '@/actions/user-controller';
 import { NavList } from '@/components/aside/components/nav-list';
 import { UserSettings } from '@/components/aside/components/user-settigns';
 import { CustomButton } from '@/components/ui/custom-button';
 import { LogoutIcon } from '@/components/ui/icons/logout';
 import { LanguageSwitcher } from '@/components/ui/language-swithcer';
-import { deleteUser } from '@/libs/features/user/user-slice';
+import { deleteUser, setActiveSessions } from '@/libs/features/user/user-slice';
 import { useAppDispatch } from '@/libs/store/hooks';
 
 import styles from './styles.module.scss';
+import { io } from 'socket.io-client';
 import { useLocale } from 'use-intl';
 
 export const Aside = () => {
@@ -20,6 +23,22 @@ export const Aside = () => {
         logout(locale);
         dispatch(deleteUser());
     };
+
+    useEffect(() => {
+        const socketUrl = `http://localhost:${process.env.NEXT_PUBLIC_SOCKET_PORT || 3001}`;
+        const socket = io(socketUrl, {
+            path: '/api/socket'
+        });
+
+        socket.on('activeSessionsUpdate', (count: number) => {
+            dispatch(setActiveSessions(count));
+            console.log('Active sessions:', count);
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [dispatch]);
 
     return (
         <aside className={styles.aside}>

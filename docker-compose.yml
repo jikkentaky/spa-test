@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+    app:
+        build: .
+        ports:
+            - '${PORT}:${PORT}'
+            - '${SOCKET_PORT}:${SOCKET_PORT}'
+        environment:
+            - NODE_ENV=production
+            - PORT=${PORT}
+            - SOCKET_PORT=${SOCKET_PORT}
+            - HOSTNAME=0.0.0.0
+        restart: unless-stopped

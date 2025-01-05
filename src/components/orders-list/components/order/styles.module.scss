@@ -1,0 +1,106 @@
+@import 'src/assets/variables-colors';
+@import 'src/assets/variables';
+@import 'src/assets/mixins';
+
+.order {
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75em 1.25em;
+        border: 0.03em solid $color-light-gray;
+        border-radius: 0.5em;
+        cursor: pointer;
+        position: relative;
+        transition:
+            background-color $transition-time,
+            color $transition-time;
+
+        &:hover {
+            background-color: $color-light-gray;
+        }
+
+        &--hidden {
+            padding-left: 1.75em;
+            padding-right: 7em;
+        }
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-right: 5em;
+    }
+
+    &__title {
+        font-size: $fs-24;
+        width: 24em;
+    }
+
+    &__icon-container {
+        border: 0.03em solid $color-dark-blue;
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+        @include flex-center;
+    }
+
+    &__product-info {
+        display: flex;
+        flex-direction: column;
+        font-size: $fs-14;
+        color: $color-gray;
+
+        &-count {
+            font-size: $fs-18;
+            color: $color-dark-blue;
+        }
+    }
+
+    &__price-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        list-style: none;
+    }
+
+    &__price-item {
+        display: flex;
+        gap: 0.25em;
+    }
+
+    &__button {
+        @include flex-center;
+        width: 3em;
+        height: 3em;
+        transition:
+            background-color $transition-time,
+            color $transition-time;
+
+        &--select {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: transparent;
+            border: none;
+            background-color: transparent;
+            height: 100%;
+            border-radius: 0 0.5em 0.5em 0;
+
+            &:hover,
+            &--selected {
+                background-color: $color-light-gray-2;
+                color: $color-white;
+                border: none;
+            }
+        }
+    }
+
+    &__product-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+    }
+}

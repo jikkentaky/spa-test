@@ -1,39 +1,36 @@
-@import "src/assets/variables-colors";
-@import "src/assets/variables";
+@import 'src/assets/variables-colors';
+@import 'src/assets/variables';
 
 .aside {
-  position: fixed;
-  top: 0;
-  width: $aside-width;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 10px 15px $color-dark-gray;
-  background-color: white;
-  padding: 10em 1em 3em;
-  z-index: 1;
-
-  &__menu {
+    position: fixed;
+    top: 0;
+    width: $aside-width;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 3em;
-  }
-
-
-  &__footer {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 100%;
-    //align-self: flex-end;
-  }
+    box-shadow: 0 0.7em 0.9em $color-dark-gray;
+    padding: 10em 1em 3em;
+    z-index: 1;
 
-  &__button {
-    background-color: transparent;
-
-    &:hover {
-      background-color: transparent;
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
     }
-  }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__button {
+        background-color: transparent;
+
+        &:hover {
+            background-color: transparent;
+        }
+    }
 }

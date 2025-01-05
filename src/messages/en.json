@@ -1,8 +1,4 @@
 {
-    "HomePage": {
-        "signUp": "Don't have an account? Create One.",
-        "welcomeMessage": "Welcome to Inventory! We're thrilled to have you here. Manage your orders and purchases effortlessly with our intuitive platform. Let's get started on making your order management seamless and efficient!"
-    },
     "Auth": {
         "titleLogin": "Log In please",
         "loginButton": "Log In",
@@ -13,10 +9,13 @@
         "userExists": "User already exists.",
         "passwordTooShort": "Password must be at least 8 characters long.",
         "passwordTooSimple": "Password must include uppercase, lowercase letters, a number, and a special character.",
-        "serverError": "An unexpected error occurred. Please try again."
+        "serverError": "An unexpected error occurred. Please try again.",
+        "signUp": "Don't have an account? Create One.",
+        "signUpLink": "or Sign Up",
+        "loginLink": "or Log In"
     },
     "Orders": {
-        "title": "orders"
+        "title": "Orders"
     },
     "Products": {
         "title": "Products",
@@ -26,5 +25,24 @@
         "orders": "orders",
         "products": "products",
         "dashboard": "dashboard"
+    },
+    "DeletePopup": {
+        "title": "Are you sure you want to delete this order?",
+        "cancel": "cancel",
+        "delete": "delete"
+    },
+    "OrderDetails": {
+        "addButton": "Add product",
+        "quantity": "Quantity"
+    },
+    "Dashboard": {
+        "title": "Dashboard Overview",
+        "cards": {
+            "totalUsers": "Total Users",
+            "revenue": "Revenue",
+            "activeSessions": "Active Sessions",
+            "newSignups": "New Signups",
+            "viewDetails": "View details"
+        }
     }
 }

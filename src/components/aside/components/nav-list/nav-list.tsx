@@ -12,9 +12,7 @@ type Props = {
     className?: string;
 };
 
-const filteredNavList = Object.values(navList).filter(
-    (item) => item.route !== navList.dashboard.route && item.route !== navList.home.route
-);
+const filteredNavList = Object.values(navList).filter((item) => item.route !== navList.home.route);
 
 export const NavList = ({ className }: Props) => {
     const t = useTranslations('Aside');

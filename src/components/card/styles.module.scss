@@ -3,33 +3,33 @@
 
 .card {
   background: $color-white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 10px 0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 0.75em;
+  box-shadow: 0 0.25em 0.375em rgba(0, 0, 0, 0.1);
+  border: 0.03em solid $color-light-gray;
+  padding: 1.25em;
+  margin: 0.7em 0;
+  transition: transform $transition-time, box-shadow $transition-time;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.31em);
+    box-shadow: 0 0.63em 0.94em rgba(0, 0, 0, 0.1);
   }
 
   &__title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: $fw-800;
+    margin-bottom: 0.63em;
   }
 
   &__content {
-    font-size: 1rem;
-    color: #555;
+    color: $color-gray;
   }
 
   &__footer {
-    margin-top: 15px;
+    margin-top: 0.94em;
     text-align: right;
-    font-size: 0.9rem;
-    color: #0070f3;
+    font-size: 0.9em;
+    color: $color-blue;
     cursor: pointer;
 
     &:hover {

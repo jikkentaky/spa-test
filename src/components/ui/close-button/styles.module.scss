@@ -1,0 +1,12 @@
+@import 'src/assets/variables-colors';
+
+.close-button {
+  padding: 0.5em;
+  background-color: $color-white;
+  border-radius: 50%;
+  box-shadow: 0 0.1em 0.2em $color-dark-gray;
+
+  &:hover {
+    background-color: $color-light-gray;
+  }
+}

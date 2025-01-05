@@ -1,15 +1,26 @@
-@import "src/assets/variables-colors";
-@import "src/assets/variables";
-@import "src/assets/mixins";
+@import 'src/assets/variables-colors';
+@import 'src/assets/variables';
+@import 'src/assets/mixins';
 
 .container {
-  display: flex;
-  justify-content: center;
-  @include container;
-  flex-direction: column;
-  padding-top: 5em;
+    display: flex;
+    justify-content: center;
+    @include container;
+    flex-direction: column;
+    padding-top: 5em;
+    gap: 1em;
 }
 
 .title {
-  text-align: center;
+    margin: 0;
+    text-align: center;
+}
+
+.link {
+    text-align: center;
+    color: $color-blue;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

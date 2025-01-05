@@ -7,7 +7,7 @@ import NotFound from '@/app/[locale]/not-found';
 import StoreProvider from '@/app/store-provider';
 import { Aside } from '@/components/aside';
 import { Header } from '@/components/header';
-import { Locale, navList, redirect, routing } from '@/i18n/routing';
+import { Locale, routing } from '@/i18n/routing';
 
 import '../../assets/globals.scss';
 import clsx from 'clsx';
@@ -33,11 +33,11 @@ const LocalLayout: FC<Props> = async ({ children, params }) => {
     const messages = await getMessages();
 
     return (
-        <StoreProvider>
+        <StoreProvider user={user}>
             <html lang={locale}>
                 <body className={inter.className}>
                     <NextIntlClientProvider messages={messages}>
-                        <Header user={user} />
+                        <Header />
 
                         <div className='wrapper'>
                             {user && <Aside />}

@@ -1,11 +1,24 @@
-'use client'
+'use client';
 
-import { ReactNode } from 'react';
-import { Provider } from 'react-redux'
+import { ReactNode, useEffect } from 'react';
+
+import { addUser } from '@/libs/features/user/user-slice';
 import { store } from '@/libs/store/store';
+import { User } from '@/types/types';
 
-export default function StoreProvider({ children }: {
-    children: ReactNode
-}) {
-    return <Provider store={store}>{children}</Provider>
+import { Provider } from 'react-redux';
+
+type Props = {
+    children: ReactNode;
+    user: User | null;
+};
+
+export default function StoreProvider({ children, user }: Props) {
+    useEffect(() => {
+        if (user) {
+            store.dispatch(addUser(user));
+        }
+    }, [user]);
+
+    return <Provider store={store}>{children}</Provider>;
 }
