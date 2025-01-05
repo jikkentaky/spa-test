@@ -48,7 +48,7 @@
         "@types/bcryptjs": "^2.4.6",
         "@types/jsonwebtoken": "^9.0.7",
         "@types/node": "^22.10.1",
-        "@types/react": "19.0.1",
+        "@types/react": "19.0.2",
         "@types/react-dom": "19.0.1",
         "eslint": "^9.16.0",
         "eslint-config-next": "15.0.4",
