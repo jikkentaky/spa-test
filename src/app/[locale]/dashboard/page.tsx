@@ -3,7 +3,7 @@
 import { Card } from '@/components/card';
 import { useAppSelector } from '@/libs/store/hooks';
 
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 import { useTranslations } from 'next-intl';
 
 const Dashboard = () => {
