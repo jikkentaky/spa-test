@@ -1,19 +1,21 @@
 'use client';
 
-import Image from 'next/image';
 import { FC } from 'react';
-import { Product } from '@/types/types';
+
+import Image from 'next/image';
+
 import { getFormattedDate } from '@/helpers';
+import { Product } from '@/types/types';
+
+import styles from './styles.module.scss';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'use-intl';
-import styles from './styles.module.scss';
 
 type Props = {
     product: Product;
 };
 
 export const ProductComponent: FC<Props> = ({ product }) => {
-    const t = useTranslations('HomePage');
     const locale = useLocale();
 
     return (
@@ -27,13 +29,9 @@ export const ProductComponent: FC<Props> = ({ product }) => {
             <p className={styles.product__type}>{product.type}</p>
 
             <div className={styles.product__guarantee}>
-                <p>
-                    с {getFormattedDate(product.guarantee.start, locale)}
-                </p>
+                <p>с {getFormattedDate(product.guarantee.start, locale)}</p>
 
-                <p>
-                    по {getFormattedDate(product.guarantee.end, locale)}
-                </p>
+                <p>по {getFormattedDate(product.guarantee.end, locale)}</p>
             </div>
 
             <ul className={styles.product__priceList}>

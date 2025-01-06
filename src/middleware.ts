@@ -12,17 +12,17 @@ const PUBLIC_ROUTES = ['/login', '/sign-up'];
 export default async function middleware(req: NextRequest) {
     const token = req.cookies.get('myapp')?.value;
     const isAuthenticated = await isTokenValid(token);
-    const locale = req.nextUrl.pathname.split('/')[1];
-    const pathname = '/' + (req.nextUrl.pathname.split('/')[2] || '');
-    const isRootPath = !req.nextUrl.pathname.split('/')[2];
 
-    if (isRootPath) {
+    if (req.nextUrl.pathname === '/') {
         if (isAuthenticated) {
-            return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url));
+            return NextResponse.redirect(new URL('/en/dashboard', req.url));
         } else {
-            return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
+            return NextResponse.redirect(new URL('/en/login', req.url));
         }
     }
+
+    const locale = req.nextUrl.pathname.split('/')[1];
+    const pathname = '/' + (req.nextUrl.pathname.split('/')[2] || '');
 
     if (PUBLIC_ROUTES.includes(pathname) && isAuthenticated) {
         return NextResponse.redirect(new URL(`/${locale}/`, req.url));

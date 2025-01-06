@@ -15,7 +15,6 @@ type Props = {
 };
 
 export const ProductsList: FC<Props> = ({ products }) => {
-    console.log(products);
     const [selectedType, setSelectedType] = useState('');
     const [currentProducts, setCurrentProducts] = useState(products);
     const t = useTranslations('Products');
