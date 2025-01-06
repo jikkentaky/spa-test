@@ -39,10 +39,10 @@ export const OrderList: FC<Props> = ({ ordersFromServer = [] }) => {
         setShowOrder(null);
     };
 
-    const handleDeleteOrder = (orderId: number) => {
+    const handleDeleteOrder = useCallback((orderId: number) => {
         setOrders((prevOrders) => prevOrders.filter(({ id }) => +id !== orderId));
         setShowOrder(null);
-    };
+    }, []);
 
     const handleDeleteClick = useCallback((orderId: number, title: string) => {
         setOrderToDelete({ id: orderId, title });
@@ -57,9 +57,9 @@ export const OrderList: FC<Props> = ({ ordersFromServer = [] }) => {
     if (!orders.length) {
         return (
             <div className={styles['order-list__container']}>
-                <h2 className={styles['order-list__title']}>Приходы / 0</h2>
+                <h2 className={styles['order-list__title']}>{t('title')} / 0</h2>
 
-                <p>Нет доступных заказов</p>
+                <p>{t('noOrders')}</p>
             </div>
         );
     }

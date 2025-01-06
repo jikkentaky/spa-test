@@ -15,7 +15,8 @@
         "loginLink": "or Log In"
     },
     "Orders": {
-        "title": "Orders"
+        "title": "Orders",
+        "noOrders": "No orders available"
     },
     "Products": {
         "title": "Products",

@@ -5,16 +5,17 @@ const startServer = async (port: number): Promise<void> => {
     const httpServer = createServer();
 
     return new Promise((resolve, reject) => {
-        httpServer.on('error', (error: NodeJS.ErrnoException) => {
+        const handleError = (error: NodeJS.ErrnoException) => {
             if (error.code === 'EADDRINUSE') {
-                startServer(port + 1)
-                    .then(resolve)
-                    .catch(reject);
+                console.log(`Port ${port} is in use, trying ${port + 1}`);
+                resolve(startServer(port + 1));
             } else {
                 console.error('Failed to start server:', error);
                 reject(error);
             }
-        });
+        };
+
+        httpServer.on('error', handleError);
 
         httpServer.listen(port, () => {
             const io = new Server(httpServer, {

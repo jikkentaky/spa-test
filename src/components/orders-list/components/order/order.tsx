@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useState } from 'react';
+import { FC, MouseEventHandler, memo, useState } from 'react';
 
 import { CustomButton } from '@/components/ui/custom-button';
 import { DeleteButton } from '@/components/ui/delete-button';
@@ -20,7 +20,7 @@ type Props = {
     onDeleteClick: (title: string) => void;
 };
 
-export const Order: FC<Props> = ({ order, onClick, isHidden, isSelected, onDeleteClick }) => {
+export const Order: FC<Props> = memo(({ order, onClick, isHidden, isSelected, onDeleteClick }) => {
     const locale = useLocale();
 
     return (
@@ -73,4 +73,4 @@ export const Order: FC<Props> = ({ order, onClick, isHidden, isSelected, onDelet
             )}
         </li>
     );
-};
+});
