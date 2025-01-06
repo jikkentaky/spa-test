@@ -1,5 +1,6 @@
 MONGO_CONNECTION=mongodb+srv://superDB:voynx8HRbCKwegT0@cluster0.ceu4c.mongodb.net/mydb?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=FAS12/321GH
-PORT=3000
+PORT=80
 SOCKET_PORT=3001
 NEXT_PUBLIC_SOCKET_PORT=3001
+NEXT_PUBLIC_SOCKET_HOST=http://localhost:

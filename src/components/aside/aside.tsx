@@ -25,7 +25,8 @@ export const Aside = () => {
     };
 
     useEffect(() => {
-        const socketUrl = `http://localhost:${process.env.NEXT_PUBLIC_SOCKET_PORT || 3001}`;
+        // const socketUrl = `${process.env.NEXT_PUBLIC_SOCKET_HOST}${process.env.NEXT_PUBLIC_SOCKET_PORT || 3001}`;
+        const socketUrl = `https://spa-test-git-main-antonliadas-projects.vercel.app`;
         const socket = io(socketUrl, {
             path: '/api/socket'
         });
