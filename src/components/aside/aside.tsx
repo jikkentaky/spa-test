@@ -25,7 +25,8 @@ export const Aside = () => {
     };
 
     useEffect(() => {
-        const socketUrl = `http://localhost:${process.env.NEXT_PUBLIC_SOCKET_PORT || 3001}`;
+        // const socketUrl = `${process.env.NEXT_PUBLIC_SOCKET_HOST}${process.env.NEXT_PUBLIC_SOCKET_PORT || 3001}`;
+        const socketUrl = `http://159.69.155.243:3001`;
         const socket = io(socketUrl, {
             path: '/api/socket'
         });
